@@ -10,7 +10,23 @@
       v-model="drawer"
       temporary
     >
-      <!--  -->
+      <v-list>
+        <v-list-subheader>功能列表</v-list-subheader>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :value="item"
+          active-color="primary"
+          class="ma-4"
+          :to="item.path"
+        >
+          <template v-slot:prepend>
+            <v-icon :icon="item.icon"></v-icon>
+          </template>
+
+          <v-list-item-title v-text="item.text"></v-list-item-title>
+        </v-list-item>
+      </v-list>
     </v-navigation-drawer>
 
     <v-main class="bg-grey-lighten-2">
@@ -90,4 +106,9 @@ const add = () =>{
 const remove = (index: number) => {
   plc_variables.value.splice(index,1);
 }
+const items = ref([
+  { text: 'PLC管理', icon: 'mdi-robot-industrial', path: '/' },
+  { text: '订单管理', icon: 'mdi-file-document', path: '/order'},
+  { text: '人员管理', icon: 'mdi-account', path: '/personnel' },
+])
 </script>
